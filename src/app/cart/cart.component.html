@@ -1,0 +1,130 @@
+<storeHeader></storeHeader>
+<!-- <h1>购物车列表</h1> -->
+
+<div class="modal" style="display:none">
+    <div class="modal_dialog">
+        <div class="modal_header">
+            删除提醒
+        </div>
+        <div class="modal_information">
+            <img src="img/model/model_img2.png" alt="" />
+            <span>确定删除您的这个宝贝吗？</span>
+        </div>
+        <div class="yes"><span>删除</span></div>
+        <div class="no"><span>不删除</span></div>
+    </div>
+</div>
+<div class="modalNo" style="display:none">
+    <div class="modal_dialog">
+        <div class="modal_header">
+            删除提示
+            <img src="img/model/model_img1.png" alt="" class="rt close" />
+        </div>
+        <div class="modal_information">
+            <img src="img/model/model_img2.png" alt="" />
+            <span>请选择商品</span>
+        </div>
+    </div>
+</div>
+<div class="big">
+    <form name="" action="" method="post">
+        <section id="section">
+            <div id="title">
+                <b>购物车</b>
+                <p>
+                    已选<span class="total color">0</span>件商品<span class="interval"></span>合计(不含运费):<span
+                        class="totalPrices color susum">0.00</span>
+                    <span class="unit color">元</span>
+                </p>
+            </div>
+            <div id="box">
+                <div id="content_box">
+                    <div class="imfor_top">
+                        <div class="check_top">
+                            <div class="all">
+                                <span class="normal">
+                                    <img src="img/cart/product_normal.png" alt="" />
+                                </span> <input type="hidden" name="" value="">全选
+                            </div>
+                        </div>
+                        <div class="pudc_top">商品</div>
+                        <div class="pices_top">单价(元)</div>
+                        <div class="num_top">数量</div>
+                        <div class="totle_top">金额</div>
+                        <div class="del_top">操作</div>
+                    </div>
+                    <div id="content_box_body">
+                        <div *ngIf="cartData.length == 0" class="loading">
+                            <img  src="img/loading.gif" alt="购物车内容加载中...">
+                        </div>
+                        <div *ngFor="let item of cartData; let index=index" class="imfor">
+                            <div class="check">
+                                <div class="Each">
+                                    <span class="normal">
+                                        <img src="img/cart/product_normal.png" alt="" />
+                                    </span>
+                                    <input type="hidden" name="" value="">
+                                </div>
+                            </div>
+                            <div class="pudc">
+                                <div class="pudc_information" id="pudcId3">
+                                    <img [src]="item.pic" class="lf" />
+                                    <input type="hidden" name="" value="">
+                                    <span class="des lf">
+                                        <a href="product_details.html">{{item.title}}</a>
+                                        <input type="hidden" name="" value="">
+                                    </span>
+                                    <p class="col lf"><span>规格：</span><span class="color_des">{{item.spec}} <input type="hidden"
+                                                name="" value=""></span></p>
+                                </div>
+                            </div>
+                            <div class="pices">
+                                <p class="pices_des">阿甲专享价</p>
+                                <p class="pices_information"><b>￥</b><span>{{item.price}} <input type="hidden" name=""
+                                            value=""></span></p>
+                            </div>
+                            <div class="num">
+                                <span (click)="subtract($event,index)" class="reduc">&nbsp;-&nbsp;</span>
+                                <input type="text" [value]="item.count">
+                                <span (click)="add($event,index)" class="add">&nbsp;+&nbsp;</span>
+                            </div>
+                            <div class="totle">
+                                <span>￥</span>
+                                <span class="totle_information">{{item.price*item.count}}</span>
+                            </div>
+                            <div class="del">
+                                <a href="javascript:;" (click)="del(index)" class="del_d">删除</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="foot">
+                    <div class="foot_check">
+                        <div class="all">
+                            <span class="normal">
+                                <img src="img/cart/product_normal.png" alt="" />
+                            </span> <input type="hidden" name="" value="">全选
+                        </div>
+                    </div>
+                    <a href="javascript:;" class="foot_del">删除</a>
+                    <!--<a href="javascript:;" class="foot_yr">移入收藏夹</a>-->
+                    <div class="foot_qk">清空失效商品</div>
+                    <div class="foot_cash" id="go-buy" (click)="jiesuan()">去结算</div>
+                    <div class="foot_tol"><span>合计(不含运费):</span><span class="foot_pices susumOne">0.00</span><span
+                            class='foot_des'>元</span></div>
+                    <div class="foot_selected">
+                        已选<span class="totalOne color">0</span>件商品
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+    <div class="none" *ngIf="cartData.length == 0" style=" z-index: 999">
+        <div class="none_content">
+            <p class="lf">您的购物车竟然还是空哒( ⊙ o ⊙ )</p>
+            <span class="lf">赶快去下单吧！</span>
+            <a [routerLink]="['/list','']" class="lf">去购物>></a>
+        </div>
+    </div>
+</div>
+<storeFooter></storeFooter>

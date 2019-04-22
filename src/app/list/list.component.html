@@ -1,0 +1,77 @@
+<storeHeader></storeHeader>
+<!-- 列表页 -->
+<!-- banner部分-->
+<div class="store">
+    <img src="img/index/index_guild.png">
+</div>
+<!--笔记本电脑列表-->
+<div class="store_action">
+    <div class="store_action_left">
+        <div class="store_action_left_content">
+            <div id="plist">
+                <div class="salc_top">
+                    笔记本电脑
+                </div>
+                <div class="salc_content">
+                    <img *ngIf="listData.length==0" class="loading" src="img/loading.gif">
+                    <div *ngFor="let item of listData; let myindex=index" class="product" [id]="item.lid">
+                        <!-- <a href="product_details.html?lid=${p.lid}"><img src="${p.pic}" alt="${p.title}" /></a> -->
+                        <a href="#"><img [src]="item.pic" [alt]="item.title" /></a>
+                        <div>
+                            <p><span class="price">￥{{item.price}}</span><a href="#" class="title"
+                                    [title]="item.title">{{item.title}}</a></p>
+                            <div>
+                                <span class="reduc lf" (click)="reduce($event)">-</span>
+                                <input type="text" value="1" class="lf" />
+                                <span class="add lf" (click)="plus($event)">+</span>
+                                <div class="addcart" (click)="addcart(myindex)">
+                                    加入购物车
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--分页条-->
+                <div class="pager">
+                        <a href="javascript:;" (click)="pageList($event)">上一页</a>
+                        <a *ngFor="let item of PageNum" (click)="pageList($event)" href="javascript:;"
+                                [ngClass]="{'current': clickPage==(item+1)}">{{item+1}}</a>
+                        <a href="javascript:;" (click)="pageList($event)">下一页</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="store_action_right rt">
+        <div class="store_action_right_top">
+            <p><img src="img/foodstore/foodstore_icon2.png" alt="" />商家公告</p>
+            <div>
+                <p>本店推出全网最低价套餐，保证比其他平台的价格要低！</p>
+                <p>不要葱、姜、蒜等这些忌口暂时无法坐不了，敬请谅解！</p>
+                <p>晚上10点以后订餐需另加送餐费2元！谢谢合作！</p>
+            </div>
+        </div>
+        <div class="store_action_right_cart">
+            <div class="store_action_right_cart_top">
+                购物车 <span class="clear rt">清空</span>
+            </div>
+            <div class="store_action_right_cart_content">
+                <div></div>
+                <div *ngFor="let item of cartData" id="5">
+                    <div style="width:70px; height:14px;overflow:hidden;line-height: 14px" [title]="item.title">{{item.title}}</div>
+                    <div><span class="cart_reduc lf">-</span><input type="text" [value]="item.count" class="lf" /><span
+                            class="cart_add lf">+</span></div>
+                    <span class="rt pc">￥:<span class="cart_unit_price">{{item.price}}</span></span>
+                </div>
+            </div>
+            <div class="sarc">
+                <div class="total_price lf">
+                    <img src="img/foodstore/foodstore_car_2.png" alt="" />￥:<span>{{countPrice}}.00</span>
+                </div>
+                <div class="settle lf">
+                    <a [routerLink]="['/cart']"  style="color:#fff;">去结算</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<storeFooter></storeFooter>
